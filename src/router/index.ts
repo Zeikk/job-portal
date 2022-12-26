@@ -1,21 +1,33 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/views/HomeView.vue'
-import AboutView from '@/views/AboutView.vue'
-import JobView from '@/views/JobView.vue'
+import StatsView from "@/views/StatsView.vue"
+import OffersView from "@/views/OffersView.vue"
+import MainView from "@/views/MainView.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/data',
-      name: 'home',
-      component: JobView
+      path: '/',
+      redirect: '/data/offers'
     },
     {
-      path: '/web',
-      name: 'about',
-      component: JobView
-    }
+      path: '/:theme',
+      component: MainView,
+      children: [
+        {
+          path: 'offers',
+          component: OffersView,
+          props: true
+
+        },
+        {
+          path: 'stats',
+          component: StatsView,
+          props: true
+        }
+      ]
+    },
+
   ]
 })
 
