@@ -24,7 +24,7 @@ export default defineComponent({
     },
     methods: {
         getData(period: string) {
-            const backUrl = "http://localhost:5000"
+            const backUrl = import.meta.env.VITE_URL_BACK;
             axios
                 .get<IJobOffer[]>(`${backUrl}/job/${this.theme?.toLowerCase()}/all${period}`)
                 .then(response => (this.jobs = response.data, this.loadedJobs = true));
