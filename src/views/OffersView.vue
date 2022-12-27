@@ -32,6 +32,7 @@ export default defineComponent({
                     <div class="ms-2 me-auto">
                         <div class="fw-bold">{{ job.title }}</div>
                         <div class="fw-light">{{ new Date(job.date).toLocaleDateString() }}</div>
+                        <div class="fw-light">{{ job.location }}</div>
                         <div class="fw-normal">{{ job.company }}</div>
                     </div>
                 </a>

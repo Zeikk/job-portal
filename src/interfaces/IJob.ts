@@ -3,6 +3,8 @@ export interface IJobOffer {
     title: string,
     href: string,
     company: string,
+    location: string,
+    source: string,
     date: Date
 }
 

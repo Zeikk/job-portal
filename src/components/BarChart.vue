@@ -34,7 +34,7 @@ export default defineComponent({
     data() {
         return {
             data: {
-                labels: this.chartData.flatMap((value) => value.company),
+                labels: this.chartData.flatMap((value) => value.company.charAt(0).toUpperCase() + value.company.substring(1).toLowerCase()),
                 datasets: [{
                     label: this.label,
                     backgroundColor: "#4a46de",
