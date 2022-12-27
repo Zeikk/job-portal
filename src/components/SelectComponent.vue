@@ -14,27 +14,51 @@ export default defineComponent({
                 case "TODAY": date = new Date(); break;
 
             }
-            return date ? `?date=${date!.toISOString().substring(0, 10)}` : ''
+            return date ? `date=${date!.toISOString().substring(0, 10)}` : ''
+        },
+        convertSourceToQuery() {
+            return this.source != 'ALL' ? `source=${this.source}` : ''
         },
         handlePeriod(event: Event) {
             this.period = (event.target as HTMLInputElement).value;
-            this.$emit('refresh-data', this.convertPeriodToDate());
+            this.$emit('refresh-data', this.convertPeriodToDate(), this.convertSourceToQuery());
+        },
+        handleSource(event: Event) {
+            this.source = (event.target as HTMLInputElement).value;
+            this.$emit('refresh-data', this.convertPeriodToDate(), this.convertSourceToQuery());
         }
     },
     data() {
-        return { period: "EVER" }
+        return {
+            period: "EVER",
+            source: "ALL"
+        }
     }
 })
 </script>
 
 <template>
-    <select class="dropdown" @change="handlePeriod">
-        <option value="EVER" selected>Toujours</option>
-        <option value="MONTH">Dernier mois</option>
-        <option value="FIFTEEN">15 dernier jours</option>
-        <option value="YESTERDAY">Hier</option>
-        <option value="TODAY">Aujourd'hui</option>
-    </select>
+    <div class="container text-center">
+        <div class="row">
+            <select class="dropdown col-lg-2" @change="handlePeriod">
+                <option value="EVER" selected>Toujours</option>
+                <option value="MONTH">Dernier mois</option>
+                <option value="FIFTEEN">15 dernier jours</option>
+                <option value="YESTERDAY">Hier</option>
+                <option value="TODAY">Aujourd'hui</option>
+            </select>
+        </div>
+        <div class="row mt-2">
+            <select class="dropdown col-lg-2" @change="handleSource">
+                <option value="ALL" selected>Toutes</option>
+                <option value="LINKEDIN">Linkedin</option>
+                <option value="INDEED">Indeed</option>
+                <option value="WELCOME TO THE JUNGLE">Welcome To The Jungle</option>
+            </select>
+        </div>
+    </div>
+
+
 </template>
 
 <style scoped>
